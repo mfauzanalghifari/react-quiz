@@ -8,7 +8,7 @@ const Comp3 = (/* NO PROPS ALLOWED */) => {
 
   return(
     <>
-      <div className={cssWrapper}>The Inputted Value is: ______*</div>
+      <div className={cssWrapper}>The Inputted Value is: {document.getElementById('mynumber')?.value}</div>
       <button type="button">Show Modal</button>
       {showModal && <Comp4/>}
     </>

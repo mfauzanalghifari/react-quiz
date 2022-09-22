@@ -3,6 +3,7 @@ import { cssWrapper } from './style';
 
 import Comp1 from "./Comp1";
 import Comp3 from "./Comp3";
+import { useState } from 'react';
 
 const question = (
   <ul>
@@ -26,18 +27,41 @@ const question = (
 );
 
 const Test5 = () => {
+  const [number, setNumber] = useState('')
+  const [latest, setLatest] = useState({})
+
+  const handleOnChange = (e) => {
+    const value = e.target.value
+    setNumber(value)
+    onLatestChange('Test5', value)
+  }
+
+  const onLatestChange = (source, value) => {
+    setLatest({source, value})
+  }
+
+  const onAdd = () => {
+    if (number) setNumber(parseInt(number) + 1)
+    else setNumber(1)
+  }
+
+  const onSubstract = () => {
+    if (number) setNumber(parseInt(number) - 1)
+    else setNumber(-1)
+  }
+
   return(
     <div>
       {question}
-      <button id="numbermin" type="button">-</button>
-      <input id="mynumber" type="text" placeholder="input mynumber"/>
-      <button id="numberplus" type="button">+</button>
+      <button onClick={onSubstract} id="numbermin" type="button">-</button>
+      <input onChange={handleOnChange} value={number} id="mynumber" type="number" placeholder="input mynumber"/>
+      <button onClick={onAdd} id="numberplus" type="button">+</button>
       <br/>
       <br/>
       <div className={cssWrapper}>
-        The inputted value is [ODD / EVEN]*
+        The inputted value is <code>{number % 2 !== 0 ? "ODD" : "EVEN"}</code> 
       </div>
-      <Comp1 />
+      <Comp1 latest={latest} onLatestChange={onLatestChange}/>
       <Comp3 />
     </div>
   )

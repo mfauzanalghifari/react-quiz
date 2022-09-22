@@ -1,6 +1,5 @@
-// import DATA from "./_data";
+const Table = ({currentData}) => {
 
-const Table = () => {
   return (
     <table>
       <thead>
@@ -9,6 +8,14 @@ const Table = () => {
           <th>Age</th>
           <th>Address</th>
         </tr>
+        { currentData.map(data => {
+          return (
+            <tr key={`${data.name}-${data.age}-${data.address}`}>
+              <td>{data.name}</td>
+              <td>{data.age}</td>
+              <td>{data.address}</td>
+            </tr>)
+        }) }
       </thead>
     </table>
   )

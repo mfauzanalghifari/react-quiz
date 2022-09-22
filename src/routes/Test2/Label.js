@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { css } from 'react-emotion';
 
 const cssLabel = css({
@@ -17,11 +18,22 @@ const cssLabel = css({
   }
 })
 
-const Label = () => {
+const Label = ({userInput, setUserInput}) => {
+  const [isHovered, setIsHovered] = useState(false)
+
+
+  const handleOnClick = () => {
+    setUserInput('')
+  }
+
   return (
-    <span className={cssLabel}>
-      RENDER VALUE HERE
-      <button type="button">⊗</button>
+    <span className={cssLabel} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      {userInput}
+      <button 
+        style={isHovered ? {display: 'inline-block'} : {display: 'none'}} 
+        onClick={handleOnClick} type="button">
+          ⊗
+      </button>
     </span>
   )
 }
