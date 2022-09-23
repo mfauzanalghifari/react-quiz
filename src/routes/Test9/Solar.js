@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { cssSpace, cssSun, cssPlanet } from './style';
 
 const Solar = ({planets, setPlanets}) => {

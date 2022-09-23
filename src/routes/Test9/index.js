@@ -45,7 +45,6 @@ const Test9 = () => {
     else {
       setPlanets([])
     }
-
   }
 
   return (
@@ -56,7 +55,7 @@ const Test9 = () => {
         <li>The color of each planet must be unique</li>
         <li>More far the planet = more time it's revolves</li>
       </ul>
-      <input min={0} value={parseInt(planets.length)} onChange={handleChange} type="number" placeholder="number of planet"/>
+      <input min={0} value={(planets.length).toString()} onChange={handleChange} type="number" placeholder="number of planet"/>
       <div>min: 0</div>
       <Solar planets={planets} setPlanets={setPlanets}/>
     </>
