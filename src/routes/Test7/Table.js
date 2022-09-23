@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Test7Context } from "./context";
 
 const Table = () => {

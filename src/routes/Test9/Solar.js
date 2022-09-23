@@ -1,12 +1,17 @@
+import { useState } from 'react';
 import { cssSpace, cssSun, cssPlanet } from './style';
 
-const Solar = () => {
+const Solar = ({planets, setPlanets}) => {
+
   return (
     <div className={cssSpace}>
-      {/* <div className={cssSun}/> */}
       {/* answer */}
       <div className={cssSun}>
-        <div className={cssPlanet()} />
+        {planets.map((planet, index) => {
+          return (
+            <div key={index} className={cssPlanet({...planet})} />
+          )
+        })}
       </div>
     </div>
   )
