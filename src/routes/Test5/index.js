@@ -1,9 +1,9 @@
 
 import { cssWrapper } from './style';
-
 import Comp1 from "./Comp1";
 import Comp3 from "./Comp3";
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { Test5Context } from './context';
 
 const question = (
   <ul>
@@ -29,32 +29,46 @@ const question = (
 const Test5 = () => {
   const [number, setNumber] = useState('')
   const [latest, setLatest] = useState({})
+  const {myNumber2} = useContext(Test5Context);
 
-  const handleOnChange = (e) => {
-    const value = e.target.value
+  useEffect(() => {
+    handleOnChange(myNumber2)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [myNumber2])
+
+  const handleOnChange = (value) => {
     setNumber(value)
     onLatestChange('Test5', value)
   }
+
 
   const onLatestChange = (source, value) => {
     setLatest({source, value})
   }
 
   const onAdd = () => {
-    if (number) setNumber(parseInt(number) + 1)
-    else setNumber(1)
+    let newNumber
+    if (number) newNumber = parseInt(number) + 1
+    else newNumber = 1
+
+    setNumber(newNumber)
+    onLatestChange('Test5', newNumber)
   }
 
   const onSubstract = () => {
-    if (number) setNumber(parseInt(number) - 1)
-    else setNumber(-1)
+    let newNumber
+    if (number) newNumber = parseInt(number) - 1
+    else newNumber = -1
+
+    setNumber(newNumber)
+    onLatestChange('Test5', newNumber)
   }
 
   return(
     <div>
       {question}
       <button onClick={onSubstract} id="numbermin" type="button">-</button>
-      <input onChange={handleOnChange} value={number} id="mynumber" type="number" placeholder="input mynumber"/>
+      <input onChange={(e) => handleOnChange(e.target.value)} value={number} id="mynumber" type="number" placeholder="input mynumber"/>
       <button onClick={onAdd} id="numberplus" type="button">+</button>
       <br/>
       <br/>

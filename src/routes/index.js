@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes as Switch, Route, Link } from "react-router-dom";
+import { Test5ContextProvider } from "./Test5/context";
 import Layout from "../components/Layout";
 import Test1 from "./Test1";
 import Test2 from "./Test2";
@@ -31,12 +32,13 @@ function Routes() {
   });
 
   return (
-    
       <Router>
-        <Layout>
-          {renderNav}
-          <Switch>{renderRoutes}</Switch>
-        </Layout>
+        <Test5ContextProvider>
+          <Layout>
+            {renderNav}
+            <Switch>{renderRoutes}</Switch>
+          </Layout>
+        </Test5ContextProvider>
       </Router>
   );
 }

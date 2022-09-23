@@ -1,18 +1,24 @@
 import { cssWrapper } from './style';
 
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Comp2 from "./Comp2";
+import { Test5Context } from './context';
 
 const Comp1 = ({latest, onLatestChange}) => {
   const [value, setValue] = useState(0);
   const [number1, setNumber1] = useState('');
+  const {myNumber2} = useContext(Test5Context);
+
+  useEffect(() => {
+    onHanldeChange(myNumber2)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [myNumber2])
 
   const onValueChange = () => {
     setValue(!value)
   }
 
-  const onHanldeChange = (e) => {
-    const value = e.target.value
+  const onHanldeChange = (value) => {
     setNumber1(value)
     onLatestChange('Comp1', value)
   }
@@ -31,7 +37,7 @@ const Comp1 = ({latest, onLatestChange}) => {
           placeholder="input mynumber1"
           style={value ? {display: 'inline-block'} : {display: 'none'}} 
           value={number1}
-          onChange={onHanldeChange}
+          onChange={(e) => onHanldeChange(e.target.value)}
         />
       </label>
       <Comp2 latest={latest}/>
