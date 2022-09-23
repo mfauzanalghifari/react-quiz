@@ -1,15 +1,24 @@
 import { cssModal } from "./style"
 
-const Modal = () => {
+const Modal = ({person, setPerson, setIsShowModal}) => {
+  const handleReset = () => {
+    setPerson({
+      name: '',
+      age: '',
+      address: '',
+    })
+    setIsShowModal(false)
+  }
+
   return (
     <div className={cssModal}>
-      Name: _____
+      Name: {person.name}
       <br/>
-      Age: _____
+      Age: {person.age}
       <br/>
-      Address: _____
+      Address: {person.address}
       <br/>
-      <button>Reset</button>
+      <button onClick={handleReset}>Reset</button>
     </div>
   );
 };

@@ -1,11 +1,29 @@
+import { useState } from 'react';
 import Modal from './Modal';
 import { cssForm } from './style';
 
+const defaultPerson = {
+  name: '',
+  age: '',
+  address: '',
+}
+
 const Test8 = () => {
+  const [person, setPerson] = useState({...defaultPerson});
+  const [isShowModal, setIsShowModal] = useState(false)
+
   // ONLY ONE HANDLE METHOD ALLOWED
-  const handleInput = () => {
+  const handleInput = (e) => {
     //...
+    const title = e.target.id
+    const temp = {...person}
+    temp[title] = e.target.value
+    setPerson(temp)
   };
+
+  const submit = (e) => {
+    setIsShowModal(true)
+  }
 
   return(
     <div>
@@ -16,13 +34,13 @@ const Test8 = () => {
         <li>Reset the form and close the modal when user click the reset button</li>
       </ul>
       <form className={cssForm}>
-        <input type="text" placeholder="name" onChange={handleInput}/>
-        <input type="text" placeholder="age" onChange={handleInput}/>
-        <textarea type="text" placeholder="address" onChange={handleInput}/>
-        <button>Submit</button>
+        <input type="text" id='name' value={person.name} placeholder="name" onChange={handleInput}/>
+        <input type="number" id='age' value={person.age} placeholder="age" onChange={handleInput}/>
+        <textarea type="text" id='address' value={person.address} placeholder="address" onChange={handleInput}/>
+        <button type='button' onClick={submit}>Submit</button>
       </form>
       {/* Only Show the modal when user clicked submit */}
-      <Modal />
+      {isShowModal && <Modal person={person} setPerson={setPerson} setIsShowModal={setIsShowModal}/>}
     </div>
   )
 }
