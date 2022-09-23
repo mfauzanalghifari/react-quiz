@@ -27,9 +27,8 @@ const question = (
 );
 
 const Test5 = () => {
-  const [number, setNumber] = useState('')
   const [latest, setLatest] = useState({})
-  const {myNumber2} = useContext(Test5Context);
+  const {myNumber2, myNumber, setMyNumber} = useContext(Test5Context);
 
   useEffect(() => {
     handleOnChange(myNumber2)
@@ -37,7 +36,7 @@ const Test5 = () => {
   }, [myNumber2])
 
   const handleOnChange = (value) => {
-    setNumber(value)
+    setMyNumber(value)
     onLatestChange('Test5', value)
   }
 
@@ -48,19 +47,19 @@ const Test5 = () => {
 
   const onAdd = () => {
     let newNumber
-    if (number) newNumber = parseInt(number) + 1
+    if (myNumber) newNumber = parseInt(myNumber) + 1
     else newNumber = 1
 
-    setNumber(newNumber)
+    setMyNumber(newNumber)
     onLatestChange('Test5', newNumber)
   }
 
   const onSubstract = () => {
     let newNumber
-    if (number) newNumber = parseInt(number) - 1
+    if (myNumber) newNumber = parseInt(myNumber) - 1
     else newNumber = -1
 
-    setNumber(newNumber)
+    setMyNumber(newNumber)
     onLatestChange('Test5', newNumber)
   }
 
@@ -68,12 +67,12 @@ const Test5 = () => {
     <div>
       {question}
       <button onClick={onSubstract} id="numbermin" type="button">-</button>
-      <input onChange={(e) => handleOnChange(e.target.value)} value={number} id="mynumber" type="number" placeholder="input mynumber"/>
+      <input onChange={(e) => handleOnChange(e.target.value)} value={myNumber} id="mynumber" type="number" placeholder="input mynumber"/>
       <button onClick={onAdd} id="numberplus" type="button">+</button>
       <br/>
       <br/>
       <div className={cssWrapper}>
-        The inputted value is <code>{number % 2 !== 0 ? "ODD" : "EVEN"}</code> 
+        The inputted value is <code>{myNumber % 2 !== 0 ? "ODD" : "EVEN"}</code> 
       </div>
       <Comp1 latest={latest} onLatestChange={onLatestChange}/>
       <Comp3 />

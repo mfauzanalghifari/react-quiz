@@ -17,7 +17,7 @@ const Comp4 = (/* NO PROPS ALLOWED */) => {
           Input Modal
           <button onClick={handleHideModal} style={{cursor: 'pointer'}} type="button">⊗</button>
         </div>
-        <input onChange={handleOnChange} value={myNumber2} id="mynumber2" type="text" placeholder="input mynumber2"></input>
+        <input onChange={handleOnChange} value={myNumber2} id="mynumber2" type="number" placeholder="input mynumber2"></input>
       </div>
     </>
   )
